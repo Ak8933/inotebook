@@ -7,7 +7,7 @@ const NoteState = (props) => {
 
     const notesInitial = [
         {
-            "_id": "6685a0e13c0057bd4c5b4e67b",
+            "_id": "6685a0e13c0057bd49c5b4e67b",
             "user": "6684de6c60cea27792296c1d",
             "title": "My title 3",
             "description": "the description 3",
@@ -16,7 +16,7 @@ const NoteState = (props) => {
             "__v": 0
         },
         {
-            "_id": "6686f43cc5723f6b584642b2e",
+            "_id": "6686f43c9c5723f6b584642b2e",
             "user": "6684de6c60cea27792296c1d",
             "title": "My title 1",
             "description": "the description 1",
@@ -25,7 +25,7 @@ const NoteState = (props) => {
             "__v": 0
         },
         {
-            "_id": "6686f44bc5763f6b584642b30",
+            "_id": "6686f44bc5763f6b5084642b30",
             "user": "6684de6c60cea27792296c1d",
             "title": "My title 2",
             "description": "the description 2",
@@ -34,7 +34,7 @@ const NoteState = (props) => {
             "__v": 0
         },
         {
-            "_id": "66868f455c573f6b584642b32",
+            "_id": "66868f4955c573f6b584642b32",
             "user": "6684de6c60cea27792296c1d",
             "title": "My title 4",
             "description": "the description 4",
@@ -43,7 +43,7 @@ const NoteState = (props) => {
             "__v": 0
         },
         {
-            "_id": "6686f44bc5730f64584642b30",
+            "_id": "6686f44bc5730f643584642b30",
             "user": "6684de6c60cea27792296c1d",
             "title": "My title 2",
             "description": "the description 2",
@@ -52,7 +52,7 @@ const NoteState = (props) => {
             "__v": 0
         },
         {
-            "_id": "6686f44bc573f16b574642b30",
+            "_id": "6686f44b1c573f16b574642b30",
             "user": "6684de6c60cea27792296c1d",
             "title": "My title 2",
             "description": "the description 2",
@@ -61,7 +61,7 @@ const NoteState = (props) => {
             "__v": 0
         },
         {
-            "_id": "6686f44bc577f6b5846428b30",
+            "_id": "6686f44bc5707f6b5846428b30",
             "user": "6684de6c60cea27792296c1d",
             "title": "My title 2",
             "description": "the description 2",
@@ -75,7 +75,7 @@ const NoteState = (props) => {
 
     //Add Note
     const addNote = (title, description, tag) => {
-        console.log("Adding a new note");
+        
 
         //TODO API call
         let note = {
@@ -94,9 +94,8 @@ const NoteState = (props) => {
 
     //Delete Note
     const deleteNote = (id) => {
-        setNotes((prevNotes) => {
-            return prevNotes.filter((noteItem) => noteItem.id !== id)
-        })
+        const newNotes = notes.filter((note) =>{ return note._id !== id})
+        setNotes(newNotes);
     }
 
 
