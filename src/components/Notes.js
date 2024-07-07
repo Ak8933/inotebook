@@ -82,11 +82,11 @@ const Notes = () => {
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="description" className="form-label">Description</label>
-                                        <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} onChange={onChange} />
+                                        <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} onChange={onChange}/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="tag" className="form-label">Tag</label>
-                                        <input type="text" className="form-control" id="etag" name="etag" value={note.etag} onChange={onChange} />
+                                        <input type="text" className="form-control" id="etag" name="etag" value={note.etag}/>
                                     </div>
                                 </form>
                             </div>
@@ -99,7 +99,7 @@ const Notes = () => {
                                 >
                                     Close
                                 </button>
-                                <button type="button" className="btn btn-primary" onClick={handleClick}>
+                                <button disabled={note.etitle.length<5 || note.edescription.length<5} type="button" className="btn btn-primary" onClick={handleClick}>
                                     Update Note
                                 </button>
                             </div>
@@ -108,8 +108,10 @@ const Notes = () => {
                 </div>
             )}
 
-            <div className="row">
+            <div className=" container row my-2">
                 <h3>Your notes</h3>
+                <div className="container mx-1">{notes.length===0 && 'No notes to display!'}</div>
+                
                 {notes.map((note) => {
                     return <NoteItem note={note} key={note._id} updateNote={updateNote} />;
                 })}
