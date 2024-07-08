@@ -18,6 +18,7 @@ router.post('/createuser', [
     body('password', 'Password must have atleast 5 characters').isLength({ min: 5 })
 ], async (req, res) => {
     //If there are errors, return bad request and the errors
+    let signup_success = false;
     const result = validationResult(req);
     if (!result.isEmpty()) {
         return res.status(400).json({ result: result.array() });
@@ -27,7 +28,8 @@ router.post('/createuser', [
     try {
         let user = await User.findOne({ email: req.body.email });
         if (user) {
-            return res.status(400).json({ error: "Sorry! Email already exists." })
+            signup_success=false;
+            return res.status(400).json({ error: "Sorry! Email already exists."})
         }
 
 
@@ -50,7 +52,8 @@ router.post('/createuser', [
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
-        res.json({ authtoken });
+        signup_success=true;
+        res.json({ signup_success,authtoken });
 
 
         //res.json({ "done": "ok" });
@@ -72,7 +75,7 @@ router.post('/login', [
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'Password can`t be blank').exists()
 ], async (req, res) => {
-    let success = false;
+    let login_success = false;
     const result = validationResult(req);
     if (!result.isEmpty()) {
         return res.status(400).json({result: result.array() });
@@ -83,14 +86,14 @@ router.post('/login', [
     try {
         let user = await User.findOne({ email });
         if (!user) {
-            success = false;
+           login_success= false;
             return res.status(400).json({ error: "Please try to login with correct credentials." })
         }
 
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
-            success = false;
-            return res.status(400).json({ success,
+            login_success= false;
+            return res.status(400).json({ login_success,
                 error: "Please try to login with correct credentials."
             })
         }
@@ -102,8 +105,8 @@ router.post('/login', [
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
-        success = true;
-        res.json({ success,authtoken });
+        login_success= true;
+        res.json({ login_success,authtoken });
 
 
         //res.json({ "done": "ok" });
