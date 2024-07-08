@@ -28,7 +28,7 @@ const Notes = () => {
     const closeModal = () => {
         setModalVisible(false);
     };
-
+ 
     const handleClick = (e) => {
        editNote(note.id, note.etitle, note.edescription, note.etag);
         refClose.current.click()
@@ -37,7 +37,6 @@ const Notes = () => {
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
-
 
     return (
         <>
@@ -99,7 +98,7 @@ const Notes = () => {
                                 >
                                     Close
                                 </button>
-                                <button disabled={note.etitle.length<5 || note.edescription.length<5} type="button" className="btn btn-primary" onClick={handleClick}>
+                                <button disabled={note.etitle.length<5 || note.edescription.length<5} type="button" className="btn btn-info" onClick={handleClick}>
                                     Update Note
                                 </button>
                             </div>
@@ -112,8 +111,8 @@ const Notes = () => {
                 <h3>Your notes</h3>
                 <div className="container mx-1">{notes.length===0 && 'No notes to display!'}</div>
                 
-                {notes.map((note) => {
-                    return <NoteItem note={note} key={note._id} updateNote={updateNote} />;
+                {notes.map((item) => {
+                    return <NoteItem note={item} key={note._id} updateNote={updateNote} />;
                 })}
             </div>
         </>
